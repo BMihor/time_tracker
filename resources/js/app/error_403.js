@@ -1,8 +1,4 @@
-var spinner;
-
-$(document).ready(function () {
-    spinner = loaderAnimationON('loading');
-    checkIP();
+﻿$(document).ready(function () {
     $('.enter').click(function () {
         redirect("login.aspx");
     });

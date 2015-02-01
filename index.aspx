@@ -19,7 +19,7 @@
             <a class="navbar-brand" href="index.aspx">
                 <span>Time Tracker</span></a>
             <div class="btn-group pull-right">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <button class="btn btn-default dropdown-toggle enter" data-toggle="dropdown">
                     <i class="glyphicon"> Войти</i><span class="hidden-sm hidden-xs"></span>
                 </button>
             </div>

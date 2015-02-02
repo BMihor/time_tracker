@@ -34,7 +34,7 @@ namespace sql_database
             }
         }
         // закрить соединение
-        private void close_connection()
+        public void close_connection()
         {
             connect.Close();
         }
@@ -57,7 +57,7 @@ namespace sql_database
         // взять, что-то из базы
         private void security_get_from_datebase(string what, string where, string conditions)
         {
-            try 
+            try
             {
                 using (SqlConnection cnn = new SqlConnection(connectionString))
                 {
@@ -76,7 +76,7 @@ namespace sql_database
             {
                 // Протоколировать исключение
                 Console.WriteLine(ex.Message);
-            }            
+            }
         }
 
 
@@ -85,6 +85,17 @@ namespace sql_database
             string sql = string.Format("Insert Into access_connect" +
             "(permitted_ip, office_name) Values('{0}','{1}')", user_id, user_first_name);
 
+            using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+            {
+                cmd.ExecuteNonQuery();
+            }
+        }
+        public void Insert_registration(string user_id, string user_first_name,
+    string user_last_name, string user_email)
+        {
+            string sql = string.Format("Insert Into user_account" +
+            "(user_id, user_first_name, user_last_name, user_email) Values('{0}','{1}','{2}','{3}')",
+            user_id, user_first_name, user_last_name, user_email);
             using (SqlCommand cmd = new SqlCommand(sql, this.connect))
             {
                 cmd.ExecuteNonQuery();

@@ -1,11 +1,18 @@
 ﻿$(document).ready(function () {
-    //check_enter();
-    $('.enterCP').click(function () {
-        $('.user_login').remove();
+    $('.go_to_user_panel').hide();
+    $('.go_to_admin_panel').click(function () {
+        $('.user_login').hide();
+        $('.go_to_user_panel').show();
+        $('.go_to_admin_panel').hide();
         enter_CP();
     });
+    $('.go_to_user_panel').click(function () {
+        $('.admin_login').remove();
+        $('.user_login').show();
+        $('.go_to_admin_panel').show();
+        $('.go_to_user_panel').hide();
+    });
 });
-
 function enter_CP() {
     var currentPosition = $('.row_pos');
     var admin_login = $('<div>')

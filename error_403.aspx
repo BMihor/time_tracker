@@ -4,12 +4,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
+    <!--" "-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--" "-->
     <title>Error 403</title>
+    <!--" "-->
     <link href="resources/style_sheet/default.css" rel="stylesheet" />
-    <script src="resources/js/vendor/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
     <link href="resources/style_sheet/error_403.css" rel="stylesheet" />
+    <!--" "-->
+    <script src="resources/js/vendor/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="resources/js/app/error_403.js" type="text/javascript"></script>
+    <!--" "-->
 </head>
 <body>
     <div class="navbar navbar-default" role="navigation">
@@ -23,11 +28,9 @@
             </div>
         </div>
     </div>
-
     <div class="ch-container">
         <div class="row row_pos">
             <div class="well center col-md-5 login-box">
-
                 <div class="wH1">
                     <h1>403</h1>
                 </div>
@@ -41,11 +44,9 @@
                     Вы пытаетесь открыть страницу, доступную только через сеть компании.
                     Чтобы продолжить, достаточно зайти через внутреннею сеть компании.
                 </p>
-
             </div>
         </div>
     </div>
-
     <script src="resources/js/vendor/bootstrap/bootstrap.js"></script>
     <form id="form1" runat="server">
         <div>

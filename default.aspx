@@ -8,16 +8,12 @@
     <title></title>
     <link href="resources/style_sheet/default.css" rel="stylesheet"/>
     <script src="resources/js/vendor/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
-
 </head>
 <body>
         <div class="navbar navbar-default" role="navigation">
-
         <div class="navbar-inner">
             <a class="navbar-brand" href="default.aspx">
                 <span>Time Tracker</span></a>
-
-            <!-- user dropdown starts -->
             <div class="btn-group pull-right">
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> Ihor Drevetskyi</span>
@@ -31,12 +27,9 @@
             </div>
         </div>
     </div>
-
     <script src="resources/js/vendor/bootstrap/bootstrap.js"></script>
-
     <form id="form1" runat="server">
-    <div>
-    
+    <div>  
     </div>
     </form>
 </body>

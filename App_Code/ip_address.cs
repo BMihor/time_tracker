@@ -17,7 +17,21 @@ namespace ip
         {
             return ip;
         }
-        public bool check_ip_registration()
+        public bool check_ip()
+        {
+            bool enable_access = false;
+            bool boolean = check_ip_registration();
+            if (boolean == true)
+            {
+                enable_access = true;
+            }
+            else
+            {
+                enable_access = false;
+            }
+            return enable_access;
+        }
+        private bool check_ip_registration()
         {
             bool boolean = false;
             database _database_ = new database();
@@ -53,10 +67,22 @@ namespace ip
                 boolean = false;
             }
             return boolean;
-        }
-        public void registration_new_ip(string ip_address, string office_name)
+        }     
+        public void registration_new_ip(string ip_address, string office_name, database Database)
         {
+            /*bool boolean = false;
             database _database_ = new database();
+            List<string> list;
+            list = Database.GetFromDatebase("permission_login_by_ip", "access_for_connect", "where permission_login_by_ip='" + permission_login_by_ip + "'");
+            if (list.LongCount() > 0)
+            {
+                boolean = true;
+            }
+            else
+            {
+                Database.registration_new_ip(office_type, permission_login_by_ip);
+                boolean = true;
+            }*/
         }
     }
 }

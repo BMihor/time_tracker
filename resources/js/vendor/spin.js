@@ -1,5 +1,4 @@
-﻿//fgnass.github.com/spin.js#v2.0.1
-!function (a, b) {
+﻿!function (a, b) {
     "object" == typeof exports ? module.exports = b() :
         "function" == typeof define && define.amd ? define(b) : a.Spinner = b()
 }(this, function () {

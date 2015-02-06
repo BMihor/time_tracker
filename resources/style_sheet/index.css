@@ -5,16 +5,18 @@
 }
 
 .login-box .btn {
-margin-top: -542px;
-margin-left: 221px;
-width: 170px;
-padding: 15px 0 15px 0;
- color: #c8c8c8;
-font-size: 22pt;
+    margin-top: -542px;
+    margin-left: 221px;
+    width: 170px;
+    padding: 15px 0 15px 0;
+    color: #c8c8c8;
+    font-size: 22pt;
 }
+
 .row {
-margin-top: -15px;
+    margin-top: -15px;
 }
+
 .login-box .btn {
     border-color: rgba(125, 185, 232, 0);
     background: #1c1e22;

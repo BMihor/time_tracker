@@ -1,18 +1,26 @@
-﻿$(document).ready(function () {
+﻿var spinner;
+
+$(document).ready(function () {
+    spinner = loaderAnimationON('loading');
     $('.go_to_user_panel').hide();
     $('.go_to_admin_panel').click(function () {
         $('.user_login').hide();
         $('.go_to_user_panel').show();
         $('.go_to_admin_panel').hide();
         enter_CP();
+        spinner.stop();
     });
     $('.go_to_user_panel').click(function () {
+        spinner = loaderAnimationON('loading');
         $('.admin_login').remove();
         $('.user_login').show();
         $('.go_to_admin_panel').show();
         $('.go_to_user_panel').hide();
+        spinner.stop();
     });
+    spinner.stop();
 });
+
 function enter_CP() {
     var currentPosition = $('.row_pos');
     var admin_login = $('<div>')
@@ -102,3 +110,39 @@ function enter_CP() {
         .attr('class', 'btn btn-primary')
     .text('Войти');
 }
+/*
+function go_to_AP() {
+
+    var currentPosition = $('.btn_login_type');
+    var button = $('<button>')
+    .appendTo(currentPosition)
+    .attr('class', 'btn btn-default dropdown-toggle enter go_to_admin_panel')
+    .attr('data-toggle', 'dropdown');
+
+    var i = $('<i>')
+    .appendTo(button)
+    .attr('class', 'glyphicon')
+    .text('Панель администратора');
+
+    var span = $('<span>')
+    .appendTo(button)
+    .attr('class', 'hidden-sm hidden-xs');
+}
+
+function go_to_UP() {
+
+    var currentPosition = $('.btn_login_type');
+    var button = $('<button>')
+    .appendTo(currentPosition)
+    .attr('class', 'btn btn-default dropdown-toggle enter go_to_user_panel')
+    .attr('data-toggle', 'dropdown');
+
+    var i = $('<i>')
+    .appendTo(button)
+    .attr('class', 'glyphicon')
+    .text('Войти через facebook');
+
+    var span = $('<span>')
+    .appendTo(button)
+    .attr('class', 'hidden-sm hidden-xs');
+}*/

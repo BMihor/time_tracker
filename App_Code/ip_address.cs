@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using sql_database;
-
+using office;
 namespace ip
 {
     public class ip_address
@@ -35,11 +35,11 @@ namespace ip
         {
             bool boolean = false;
             database _database_ = new database();
+            _database_.open_connection();
             char [] _ip_address_false = new char[ip.Length];
             char[] _ip_address_true = new char[ip.Length - 2];
             _ip_address_false = ip.ToCharArray();
             string ip_true;
-
             if (_ip_address_false[0] == ':')
             {
                 for (int i = 0; i < ip.Length - 2; i++)
@@ -66,23 +66,11 @@ namespace ip
             {
                 boolean = false;
             }
+            _database_.close_connection();
             return boolean;
         }     
-        public void registration_new_ip(string ip_address, string office_name, database Database)
+        public void registration_new_ip(company_office office, database Database)
         {
-            /*bool boolean = false;
-            database _database_ = new database();
-            List<string> list;
-            list = Database.GetFromDatebase("permission_login_by_ip", "access_for_connect", "where permission_login_by_ip='" + permission_login_by_ip + "'");
-            if (list.LongCount() > 0)
-            {
-                boolean = true;
-            }
-            else
-            {
-                Database.registration_new_ip(office_type, permission_login_by_ip);
-                boolean = true;
-            }*/
         }
     }
 }

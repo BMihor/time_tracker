@@ -1,6 +1,5 @@
-﻿.ch-container {
-    width: 90%;
-    margin: 0 auto;
+﻿body{ min-width:447px;}.ch-container {
+    width: 90%;    margin: 0 auto;
     padding: 0 30px;
 }
 
@@ -15,7 +14,7 @@ div.center, p.center {
 div.center {
     margin-top: 4%;
     box-shadow: 0 0 50px rgba(189, 189, 189, 0.4);
-    width: 70%;
+    width: 70%; min-width: 404px;
 }
 
 

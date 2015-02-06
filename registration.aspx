@@ -4,23 +4,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <!--" "-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!--" "-->
     <title>Регистрация</title>
-    <!--" "-->
     <link href="resources/style_sheet/default.css" rel="stylesheet" />
     <link href="resources/style_sheet/login.css" rel="stylesheet" />
-    <!--" "-->
     <script src="resources/js/vendor/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="resources/js/vendor/spin.js" type="text/javascript"></script>
+    <script src="resources/js/app/spinner.js" type="text/javascript"></script>
     <script src="resources/js/app/login.js" type="text/javascript"></script>
     <script src="resources/js/app/facebook.js" type="text/javascript"></script>
     <script src="resources/js/app/user_registration.js" type="text/javascript"></script>
-    <script src="resources/js/app/registration.js" type="text/javascript"></script>
-    <!--" "-->
 </head>
 <body>
     <div id="fb-root"></div>
+    <div id="loading"></div>
     <div class="navbar navbar-default" role="navigation">
         <div class="navbar-inner">
             <a class="navbar-brand" href="index.aspx">
@@ -70,7 +67,7 @@
                                 </li>
                                 <li>
                                     <p class="center col-md-5">
-                                        <input type="submit" class="btn btn-primary" onclick=" user_registration()" value="Зарегистрироватся" />
+                                        <input type="submit" class="btn btn-primary" onclick="user_registration()" value="Зарегистрироватся" />
                                     </p>
                                 </li>
                             </ul>

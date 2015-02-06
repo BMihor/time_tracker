@@ -8,7 +8,6 @@ using System.Web.Services;
 using ip;
 using sql_database;
 using user;
-using using_registration;
 
 public partial class registration : System.Web.UI.Page
 {
@@ -19,9 +18,12 @@ public partial class registration : System.Web.UI.Page
     [WebMethod]
     public static bool check_ip()
     {
+        database _database_ = new database();
+        _database_.open_connection();
         bool enable_access = false;
         ip_address address = new ip_address();
         enable_access = address.check_ip();
+        _database_.close_connection();
         return enable_access;
     }
     [WebMethod]
@@ -29,22 +31,9 @@ public partial class registration : System.Web.UI.Page
     {
         bool boolean = false;
         database Database = new database();
+        current_user CurrentUser = new current_user(id);
         Database.open_connection();
-        List<string> list;
-        list = Database.get_from_datebase("user_id", "user_account", "where user_id='" + id + "'");
-        if (list == null)
-        {
-            boolean = false;
-        }
-        else
-            if (list.LongCount() > 0)
-            {
-                boolean = true;
-            }
-            else
-            {
-                boolean = false;
-            }
+        boolean = CurrentUser.function_registration_check(Database);
         Database.close_connection();
         return boolean;
     }
@@ -55,10 +44,9 @@ public partial class registration : System.Web.UI.Page
         current_user CurrentUser = new current_user(id, first_name, last_name, email);
         database Database = new database();
         Database.open_connection();
-        reg register = new reg();
         if (type == "registration")
         {
-            boolean = register.function_registration(CurrentUser, Database);
+            boolean = CurrentUser.function_registration(Database);
         }
         Database.close_connection();
         return boolean;

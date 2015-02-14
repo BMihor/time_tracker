@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
-using office;
 using user;
 using time_user;
+using office;
 
 namespace sql_database
 {
@@ -15,7 +15,6 @@ namespace sql_database
         private List<string> database_records;
         private SqlConnection connect = null;
         private string connectionString;
-
         // строка подключения
         public database()
         {
@@ -68,6 +67,114 @@ namespace sql_database
             { }
             return database_records;
         }
+        // новый пользователь
+        public void insert_datebase_user(string user_id, string user_first_name,
+         string user_last_name, string user_email)
+        {
+            try
+            {
+                string sql = string.Format("Insert Into user_account" +
+                "(user_id, user_first_name, user_last_name, user_email) Values('{0}','{1}','{2}','{3}')",
+                user_id, user_first_name, user_last_name, user_email);
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            { }
+        }
+        // вставить запись что пользователь авторизировался
+        public void insert_datbase_session_connection(string user_id, database Database)
+        {
+            bool start = false;
+            bool finish = false;
+            bool connection = true;
+            try
+            {
+                string sql = string.Format("Insert Into user_session " + "(user_id, start_status, finish_status, connection_status)Values('{0}', '{1}','{2}','{3}')",
+                   user_id, start, finish, connection);
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            { }
+        }
+        // обновить запись сессии (количество времени после нажатия кнопки старт)
+        public void update_datebase_session_connection(string user_id, bool status)
+        {
+            try
+            {
+                string sql = string.Format("UPDATE user_session" + " " +
+                       "set connection_status='" + status + "' " +
+                   "where user_id='" + user_id + "'" + ";");
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            { }
+        }
+        public bool session_status_connection(string user_id, bool status)
+        {
+            bool boolean = false;
+            List<string> list;
+            list = get_from_datebase("connection_status", "user_session", "where user_id='" + user_id + "' and connection_status='true'");
+            if (list == null)
+            {
+                boolean = false;
+            }
+            else
+                if (list.LongCount() > 0)
+                {
+                    boolean = true;
+                }
+                else
+                {
+                    boolean = false;
+                }
+            return boolean;
+        }
+        // статус кнопок
+        public bool session_button(current_user CurrentUser)
+        {
+            bool boolean = false;
+            List<string> list;
+            list = get_from_datebase("start_status", "user_session", "where user_id='" + CurrentUser.Get_user_id() + "' and start_status='true'");
+            if (list == null)
+            {
+                boolean = false;
+            }
+            else
+                if (list.LongCount() > 0)
+                {
+                    boolean = true;
+                }
+                else
+                {
+                    boolean = false;
+                }
+            return boolean;
+        }
+        // обновить запись сессии (количество времени после нажатия кнопки старт)
+        public void update_datebase_session_time_count(int counts, current_user CurrentUser)
+        {
+            try
+            {
+                string sql = string.Format("UPDATE user_session" + " " +
+                       "set data_timer=" + counts + " " +
+                   "where user_id='" + CurrentUser.Get_user_id() + "'" + ";");
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            { }
+        }
         // удалить что-то из базы
         public void delete_datebase(string what, string condition)
         {
@@ -114,22 +221,6 @@ namespace sql_database
             catch (SqlException ex)
             { }
         }
-        // обновить запись сессии (количество времени после нажатия кнопки старт)
-        public void update_datebase_session_time_count(int counts, current_user CurrentUser)
-        {
-            try
-            {
-                string sql = string.Format("UPDATE user_session" + " " +
-                       "set data_timer=" + counts + " " +
-                   "where user_id='" + CurrentUser.Get_user_id() + "'" + ";");
-                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException ex)
-            { }
-        }
         // вставить что-то в базу
         // новый офис
         public void insert_datebase(company_office _office_)
@@ -146,24 +237,6 @@ namespace sql_database
             catch (SqlException ex)
             { }
         }
-        // новый пользователь
-        public void insert_datebase_user(string user_id, string user_first_name,
-         string user_last_name, string user_email)
-        {
-            try
-            {
-                string sql = string.Format("Insert Into user_account" +
-                "(user_id, user_first_name, user_last_name, user_email) Values('{0}','{1}','{2}','{3}')",
-                user_id, user_first_name, user_last_name, user_email);
-                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (SqlException ex)
-            { }
-        }
-
         // вставить записи в табличку записей
         public void insert_datebase_session_on_file(current_user CurrentUser, user_time time, database Database)
         {
@@ -175,14 +248,15 @@ namespace sql_database
             {
                 string sql = string.Format("Insert Into user_recording " + "(user_id, data_start_Day, data_start_Month, data_start_Year, data_start_Hour, data_start_Min, data_start_Sec, data_finish_Day, data_finish_Month, data_finish_Year, data_finish_Sec, data_finish_Min, data_finish_Hour, type_created, count_hours_all, count_hours_for_day)Values('{0}', '{1}','{2}','{3}','{4}','{5}','{6}','{7}', '{8}','{9}','{10}','{11}','{12}', '{13}', '{14}', '{15}')",
                        CurrentUser.Get_user_id(), time.Get_day(), time.Get_month(), time.Get_year(), time.Get_hour(), time.Get_min(), time.Get_sec(), finish_time, finish_time, finish_time, finish_time, finish_time, finish_time, type_created, count_hours_all, count_hours_for_day);
-                    using (SqlCommand cmd = new SqlCommand(sql, this.connect))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
             }
             catch (SqlException ex)
             { }
         }
+
         // вставить запись сессии после нажатия кнопки старт
         public void insert_datbase_session_start(current_user CurrentUser, user_time time, database Database)
         {
@@ -207,27 +281,6 @@ namespace sql_database
             }
             catch (SqlException ex)
             { }
-        }
-        // статус кнопок
-        public bool session_button(current_user CurrentUser)
-        {
-            bool boolean = false;
-            List<string> list;
-            list = get_from_datebase("start_status", "user_session", "where user_id='" + CurrentUser.Get_user_id() + "' and start_status='true'");
-            if (list == null)
-            {
-                boolean = false;
-            }
-            else
-                if (list.LongCount() > 0)
-                {
-                    boolean = true;
-                }
-                else
-                {
-                    boolean = false;
-                }
-            return boolean;
         }
     }
 }

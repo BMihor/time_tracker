@@ -8,6 +8,7 @@
     <title>Регистрация</title>
     <link href="resources/style_sheet/default.css" rel="stylesheet" />
     <link href="resources/style_sheet/login.css" rel="stylesheet" />
+    <link href="resources/style_sheet/registrationvalid.css" rel="stylesheet" />
     <script src="resources/js/vendor/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="resources/js/vendor/spin.js" type="text/javascript"></script>
     <script src="resources/js/app/spinner.js" type="text/javascript"></script>
@@ -24,6 +25,7 @@
                 <span>Time Tracker</span></a>
         </div>
     </div>
+
     <div class="content">
         <div class="ch-container">
             <div class="row">
@@ -36,32 +38,51 @@
                         </div>
                         <div class="form-horizontal contact_form">
                             <ul>
-                                <li>
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-user red"></i>
-                                        </span>
-                                        <input type="text" class="form-control name" id="name" placeholder="Введите свое имя." autocomplete="off" onfocus="placeholder='';" onblur="placeholder='Введите свое имя.';" required="required" title="Maximum 16 characters" pattern="^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$" />
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <br />
+                                <li id="validn">
+                                    <p class="message_valid">Введите коректное имя</p>
                                 </li>
                                 <li>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-user red"></i>
                                         </span>
-                                        <input type="text" class="form-control surname" id="surname" placeholder="Введите свою фамилию." autocomplete="off" onfocus="placeholder='';" onblur="placeholder='Введите свою фамилию.';" required="required" title="Maximum 16 characters" pattern="^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$" />
+                                        <input type="text" class="form-control name" id="name" placeholder="Введите свое имя(до 30 символов )."
+                                            autocomplete="off" onfocus="placeholder='';" onblur="placeholder='Введите свое имя(до 30 символов ).';" oninput="mail()"
+                                            required="required" title="Maximum 30 characters"
+                                            pattern="^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$" />
                                     </div>
                                     <div class="clearfix"></div>
                                     <br />
+                                </li>
+
+                                <li id="valids">
+                                    <p class="message_valid">Введите коректною фамилию</p>
+                                </li>
+                                <li>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user red"></i>
+                                        </span>
+                                        <input type="text" class="form-control surname" id="surname" placeholder="Введите свою фамилию(до 30 символов )." oninput="mail()"
+                                            autocomplete="off" onfocus="placeholder='';" onblur="placeholder='Введите свою фамилию(до 30 символов ).';"
+                                            required="required" title="Maximum 30 characters"
+                                            pattern="^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$" />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br />
+                                </li>
+
+                                <li id="valide">
+                                    <p class="message_valid">Введите коректный e-mail</p>
                                 </li>
                                 <li>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-envelope red"></i>
                                         </span>
-                                        <input type="text" class="form-control email" id="email" placeholder="Введите e-mail." autocomplete="off" onfocus="placeholder='';" onblur="placeholder='Введите e-mail.';" required="required" title="" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" />
+                                        <input type="email" class="form-control email" id="email" placeholder="Введите e-mail."
+                                            autocomplete="off" onfocus="placeholder='';" onblur="placeholder='Введите e-mail.';" oninput="mail()"
+                                            required="required" title="" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,4}" />
                                     </div>
                                     <div class="clearfix"></div>
                                 </li>
@@ -77,7 +98,7 @@
             </div>
         </div>
     </div>
-    <script src="resources/js/vendor/bootstrap/bootstrap.js"></script>
+    <!--<script src="resources/js/vendor/bootstrap/bootstrap.js"></script>-->
     <form id="form1" runat="server">
         <div>
             <asp:ScriptManager ID="ScriptManager2" runat="server" EnablePageMethods="true"></asp:ScriptManager>

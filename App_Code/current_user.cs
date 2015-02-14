@@ -46,6 +46,7 @@ namespace user
         {
             return user_first_name + " " + user_last_name;
         }
+
         public bool function_registration_check(database Database)
         {
             bool boolean = false;
@@ -66,11 +67,32 @@ namespace user
                 }
             return boolean;
         }
+        public bool function_authorization_check(database Database)
+        {
+            bool boolean = false;
+            List<string> list;
+            list = Database.get_from_datebase("connection_status", "user_session", "where user_id='" + user_id + "' and connection_status='1'");
+            if (list == null)
+            {
+                boolean = false;
+            }
+            else
+                if (list.LongCount() > 0)
+                {
+                    boolean = true;
+                }
+                else
+                {
+                    boolean = false;
+                }
+            return boolean;
+        }
         public bool function_registration(database Database)
         {
             bool boolean = false;
             Database.insert_datebase_user(user_id, user_first_name,
         user_last_name, user_email);
+            Database.insert_datbase_session_connection(user_id, Database);
             boolean = true;
             return boolean;
         }

@@ -14,7 +14,7 @@
             else {
                 email = response.email;
             }
-            PageMethods.create_session(response.id, _day, _month, _year, _sec, _min, _hour, onSucess, onError);
+            PageMethods.create_session(_day, _month, _year, _sec, _min, _hour, response.id, onSucess, onError);
             function onSucess(result) {
 
             }
@@ -69,18 +69,15 @@ function start(count_curent_time) {
             day = now.getDate();
             hour = now.getHours();
             min = now.getMinutes();
-            sec = now.getSeconds();
+            sec = now.getSeconds();       
             PageMethods.create_session(day, month, year, sec, min, hour, response.id, onSucess, onError);
-            function onSucess(result) {
-            }
-            function onError(result) {
-
-            }
+            function onSucess(result) { }
+            function onError(result) { }
             PageMethods.session_time(day, month, year, sec, min, hour, response.id, onSucess, onError);
             function onSucess(result) {
-                PageMethods.save_session_time(result, response.id, onSucess, onError);
+                /*PageMethods.save_session_time(result, response.id, onSucess, onError);
                 function onSucess(result) { }
-                function onError(result) { }
+                function onError(result) { }*/
             }
             function onError(result) {
 

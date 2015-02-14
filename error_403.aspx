@@ -18,7 +18,7 @@
                 <span>Time Tracker</span></a>
             <div class="btn-group pull-right">
                 <button class="btn btn-default dropdown-toggle enter" data-toggle="dropdown">
-                    <i class="glyphicon">Войти</i><span class="hidden-sm hidden-xs"></span>
+                    <i class="glyphicon">Панель администратора</i><span class="hidden-sm hidden-xs"></span>
                 </button>
             </div>
         </div>
@@ -42,8 +42,7 @@
             </div>
         </div>
     </div>
-    <script src="resources/js/vendor/bootstrap/bootstrap.js"></script>
-    <form id="form1" runat="server">
+        <form id="form1" runat="server">
         <div>
         </div>
     </form>

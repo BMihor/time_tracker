@@ -13,8 +13,9 @@
 .navbar-inner {
     padding-top: 5px;
     padding-bottom: 5px;
-    line-height: 30px;
+    line-height: 17px;
     height: 60px;
+background: #353a41;
 }
 
     .navbar-inner .btn-group {

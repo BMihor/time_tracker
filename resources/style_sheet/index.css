@@ -21,3 +21,7 @@
     border-color: rgba(125, 185, 232, 0);
     background: #1c1e22;
 }
+
+.contact_form li {
+    list-style-type: none;
+}

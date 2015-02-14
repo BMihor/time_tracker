@@ -184,7 +184,7 @@ namespace time_user
                 }
                 while (days > 0)
                 {
-                    for ( int m = month; days >= month_days[month - 1]; )
+                    for (int m = month; days >= month_days[month - 1]; )
                         if (days >= month_days[month - 1])
                         {
                             days -= month_days[month - 1];

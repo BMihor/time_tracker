@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using program_logic;
 using System.Web.Services;
-using sql_database;
-using ip;
 using user;
+using sql_database;
 
 public partial class index : System.Web.UI.Page
 {
@@ -15,29 +15,31 @@ public partial class index : System.Web.UI.Page
     {
 
     }
+
     [WebMethod]
     public static bool check_ip()
     {
-        database _database_ = new database();
-        _database_.open_connection();
-        bool enable_access = false;
-        ip_address address = new ip_address();
-        enable_access = address.check_ip();
-        _database_.close_connection();
-        return enable_access;
+        Program_logic logic = new Program_logic();
+        return logic.check_ip();
+    }
+    [WebMethod]
+    public static bool check_is_user_and_connected(string id)
+    {
+        Program_logic logic = new Program_logic();
+        return logic.check_is_user_and_connected(id);;
     }
     [WebMethod]
     public static bool initialization(string id, string type)
     {
-        bool boolean = false;
-        current_user CurrentUser = new current_user(id);
-        database Database = new database();
-        Database.open_connection();
-        if (type == "login")
-        {
-            boolean = CurrentUser.function_registration_check(Database);
-        }
-        Database.close_connection();
-        return boolean;
+        Program_logic logic = new Program_logic();
+        return logic.initialization_login(id, type);
+    }
+    [WebMethod]
+    public static void session_connection(string id, bool status)
+    {
+        database _database_ = new database();
+        _database_.open_connection();
+        _database_.update_datebase_session_connection(id, status);
+        _database_.close_connection();
     }
 }

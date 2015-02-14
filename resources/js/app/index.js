@@ -3,26 +3,25 @@
 $(document).ready(function () {
     spinner = loaderAnimationON('loading');
     $('.error_403_js').remove();
-    checkIP();
     $('.enter').click(function () {
         redirect("login.aspx");
     });
+    checkIP();
 });
 
 function checkIP() {
     PageMethods.check_ip(onSucess, onError);
     function onSucess(result) {
-        spinner.stop();
         if (result == true) {
-            initialization_enter_user();
+            check_logged_user();
+            spinner.stop();
         }
         else {
+            spinner.stop();
             redirect("error_403.aspx");
         }
     }
-    function onError(result) {
-        alert("System Error");
-    }
+    function onError(result) { alert("System Error"); }
 }
 
 function initialization_enter_user() {
@@ -51,7 +50,7 @@ function initialization_enter_user() {
     var alert = $('<div>')
     .appendTo(well)
     .attr('class', 'alert alert-info')
-    .text('Пожалуйста, войдите через социальную сеть.  ');
+    .text('Пожалуйста, войдите через социальную сеть.');
 
     var form = $('<div>')
     .appendTo(well)

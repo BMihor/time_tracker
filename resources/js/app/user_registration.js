@@ -1,5 +1,61 @@
 ﻿$(window).load(function () {
-    registration();
+    $('.admin_login').hide();
+    PageMethods.check_ip(onSucess, onError);
+    function onSucess(result) {
+        if (result == true){
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1545155435771649',
+                    cookie: true,  // enable cookies to allow the server to access 
+                    // the session
+                    xfbml: true,  // parse social plugins on this page
+                    version: 'v2.1' // use version 2.1
+                });
+                FB.getLoginStatus(function (response) {
+                    if (response.authResponse) {
+                        FB.api('/me', function (response) {
+                            PageMethods.check_is_user(response.id, onSucess, onError);
+                            function onSucess(result) {
+                                if (result == true) {
+                                    
+                                    PageMethods.session_status_connection(response.id, true, onSucess, onError);
+                                    function onSucess(result) {
+                                        if (result == true) {
+                                            redirect("tracker.aspx");
+                                        }
+                                        else {
+                                            redirect("index.aspx");
+                                        }
+                                    }
+                                    function onError(result) { alert("System Error"); }
+                                }
+                                else {
+                                    $('.user_login').show();
+                                    registration();
+                                }
+                            }
+                            function onError(result) { alert("System Error"); }
+                        });
+                    }
+                    else {
+                        registration();
+                    }
+                });
+            }
+        }
+        else
+        { 
+            redirect("error_403.aspx");
+        }
+    }
+    function onError(result) { alert("System Error"); }   
 });
 
 
@@ -52,7 +108,9 @@ function check_user(_user_id_) {
     function onSucess(result) {
         if (result == true) {
             spinner.stop();
-            redirect("tracker.aspx");
+            PageMethods.session_connection(_user_id_, true, onSucess, onError);
+            function onSucess(result) { redirect("tracker.aspx"); }
+            function onError(result) { alert("System Error"); }
         }
         else {
             var _name_ = document.getElementById("name").value;
@@ -66,6 +124,7 @@ function check_user(_user_id_) {
             else {
                 _email = true;
             }
+            user_valid();
             if (_name_ != "" && _surname_ != "" && _email == true) {
                 FB.api('/me', function (response) {
                     SentToServer(response.id, _name_, _surname_, _email_, "registration");
@@ -88,7 +147,7 @@ function SentToServer(id, first_name, last_name, email, type) {
     PageMethods.initialization(_id_, _first_name_, _last_name_, _email_, _type_, onSucess, onError);
     function onSucess(result) {
         if (result == true) {
-            redirect("tracker.aspx");
+ redirect("tracker.aspx");
         }
         else {
             redirect("registration.aspx");
@@ -97,4 +156,35 @@ function SentToServer(id, first_name, last_name, email, type) {
     function onError(result) {
         alert("System Error");
     }
+}
+
+function mail() {
+    var mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (mail.test(email.value))
+        document.getElementById("valide").style.display = "none";
+    var n = /^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$/;
+    if (n.test(document.getElementById("name").value))
+        document.getElementById("validn").style.display = "none";
+    var s = /^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$/;
+    if (s.test(document.getElementById("surname").value))
+        document.getElementById("valids").style.display = "none";
+
+
+}
+function user_valid() {
+    var mail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (mail.test(email.value) == false)
+        document.getElementById("valide").style.display = "block";
+    else
+        document.getElementById("valide").style.display = "none";
+    var n = /^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$/;
+    if (n.test(document.getElementById("name").value) == false)
+        document.getElementById("validn").style.display = "block";
+    else
+        document.getElementById("validn").style.display = "none";
+    var s = /^[a-zA-Zа-яА-ЯіЇ0-9_-]{2,15}$/;
+    if (s.test(document.getElementById("surname").value) == false)
+        document.getElementById("valids").style.display = "block";
+    else
+        document.getElementById("valids").style.display = "none";
 }

@@ -8,6 +8,7 @@ using System.Web.Services;
 using ip;
 using sql_database;
 using user;
+using program_logic;
 
 public partial class registration : System.Web.UI.Page
 {
@@ -18,13 +19,8 @@ public partial class registration : System.Web.UI.Page
     [WebMethod]
     public static bool check_ip()
     {
-        database _database_ = new database();
-        _database_.open_connection();
-        bool enable_access = false;
-        ip_address address = new ip_address();
-        enable_access = address.check_ip();
-        _database_.close_connection();
-        return enable_access;
+        Program_logic logic = new Program_logic();
+        return logic.check_ip();
     }
     [WebMethod]
     public static bool check_is_user(string id)
@@ -49,6 +45,16 @@ public partial class registration : System.Web.UI.Page
             boolean = CurrentUser.function_registration(Database);
         }
         Database.close_connection();
+        return boolean;
+    }
+    [WebMethod]
+    public static bool session_status_connection(string id, bool status)
+    {
+        bool boolean = false;
+        database _database_ = new database();
+        _database_.open_connection();
+        boolean = _database_.session_status_connection(id, status);
+        _database_.close_connection();
         return boolean;
     }
 }

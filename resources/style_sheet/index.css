@@ -5,12 +5,11 @@
 }
 
 .login-box .btn {
-    margin-top: -542px;
-    margin-left: 221px;
-    width: 170px;
+    margin-top: -414px;
+    width: 240px;
     padding: 15px 0 15px 0;
-    color: #c8c8c8;
-    font-size: 22pt;
+    color: white;
+    font-size: 20pt;
 }
 
 .row {
@@ -18,10 +17,16 @@
 }
 
 .login-box .btn {
-    border-color: rgba(125, 185, 232, 0);
-    background: #1c1e22;
+    background: #164198;
+    border: 4px solid #0A2C70;
 }
 
 .contact_form li {
     list-style-type: none;
+}
+
+element.style {
+}
+img {
+visibility: hidden;
 }

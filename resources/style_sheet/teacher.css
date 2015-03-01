@@ -1,0 +1,149 @@
+﻿table.example.table.table-striped.table-bordered.dataTable {
+    border-top: 1px solid #ddd;
+}
+
+table.example.table.table-striped.table-bordered.dataTable {
+    border-top: 1px solid #161515;
+}
+
+.weeks {
+    margin: 6px 0 6px 6px;
+width: 49%;
+float: left;
+}
+
+.user_name, .mounth, th, .year_count, .student_table{
+     text-align: center;
+}
+
+table {
+margin:5px;
+}
+
+a:-webkit-any-link {
+    color: #ddd;
+text-decoration: none;
+cursor: auto;
+}
+
+a:active, a:hover {
+           
+    }
+
+td:hover {
+    background-color: #778899;
+    cursor:pointer;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td:hover  {
+    background-color: #778899;
+}
+
+#left-block {
+     width: 20%;
+     float: left;
+     cursor:pointer;
+}
+
+#right-block {
+width: 10%;
+float: right;
+margin-right: 1%;
+display: inline-block;
+}
+
+#center-block {
+width: 68%;
+display: inline-block;
+margin-left: 5px;
+float: left;
+}
+
+#head, #head_properties {
+margin: 6px 0 0px 6px;
+}
+
+#head_properties {
+font-size: 20px;
+text-align:center;
+}
+
+td.pressed, td.pressed_2, td.pressed_3 {
+    background-color: #778899;
+    cursor:pointer;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td.pressed, 
+.table-striped > tbody > tr:nth-child(odd) > td.pressed,
+
+.table-striped > tbody > tr:nth-child(odd) > td.pressed_2, 
+.table-striped > tbody > tr:nth-child(odd) > td.pressed_2,
+
+.table-striped > tbody > tr:nth-child(odd) > td.pressed_3, 
+.table-striped > tbody > tr:nth-child(odd) > td.pressed_3
+
+ {
+    background-color: #778899;
+}
+
+
+td._time_false{
+    color:#B22222;
+    cursor:pointer;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td._time_false,
+.table-striped > tbody > tr:nth-child(odd) > td._time_false {
+    color:#B22222;
+}
+
+._time_false_month {
+color:#B22222;
+}
+
+table.table {
+width: 99%;
+margin: 6px auto;
+}
+
+input[type="text"] {
+height: 20px;
+padding: 4px 6px;
+font-size: 14px;
+line-height: 20px;
+color: #555;
+border-radius: 4px;
+border: greenyellow;
+background: #1c1e22;
+ visibility: visible; 
+}
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+    border: 2px solid #1c1e22;
+    background: #757578;
+    border-radius: 7px;
+}
+
+
+.table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
+text-align: center;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
+text-align: center;
+}
+
+body {
+font-family: sans-serif;
+color: #FFFFFF;
+}
+
+#head_officeConfiguration {
+font-size: 20px;
+text-align: center;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+text-align: center;
+}

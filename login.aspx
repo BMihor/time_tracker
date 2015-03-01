@@ -9,8 +9,10 @@
     <link href="resources/style_sheet/default.css" rel="stylesheet" />
     <link href="resources/style_sheet/login.css" rel="stylesheet" />
     <script src="resources/js/vendor/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="resources/js/app/redirect.js" type="text/javascript"></script>
     <script src="resources/js/vendor/spin.js" type="text/javascript"></script>
     <script src="resources/js/app/spinner.js" type="text/javascript"></script>
+
     <script src="resources/js/app/facebook.js" type="text/javascript"></script>
     <script src="resources/js/app/login.js" type="text/javascript"></script>
 </head>
@@ -55,10 +57,9 @@
             </div>
         </div>
     </div>
-    <!--<script src="resources/js/vendor/bootstrap/bootstrap.js"></script>-->
     <form id="form1" runat="server">
         <div>
-            <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true"></asp:ScriptManager>
+            <asp:ScriptManager ID="ScriptManager" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         </div>
     </form>
 </body>

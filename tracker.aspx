@@ -8,17 +8,20 @@
     <title>Tracker</title>
 
     <link href="resources/style_sheet/table.css" rel="stylesheet" />
+    <link href="resources/style_sheet/table-main.css" rel="stylesheet" />
     <link href="resources/style_sheet/default.css" rel="stylesheet" />
     <link href="resources/style_sheet/button.css" rel="stylesheet" />
     <link href="resources/style_sheet/timer.css" rel="stylesheet" />
-
+    
     <script src="resources/js/vendor/jquery/jquery-2.1.3.min.js" type="text/javascript"></script>
     <script src="resources/js/vendor/spin.js" type="text/javascript"></script>
     <script src="resources/js/app/spinner.js" type="text/javascript"></script>
-
     <script src="resources/js/app/facebook.js" type="text/javascript"></script>
-    <script src="resources/js/app/tracker.js" type="text/javascript"></script>
     <script src="resources/js/app/session.js" type="text/javascript"></script>
+    <script src="resources/js/app/table.js" type="text/javascript"></script>
+    <script src="resources/js/app/tracker.js" type="text/javascript"></script>
+
+    <link href="resources/style_sheet/tracker.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -43,8 +46,8 @@
             <form name="TestForm" class=" stats_overview overview_today">
                 <div class="timerTest">
                     <input class="timer" name="stopwatch" size="10" value="" disabled="disabled" />
-                    <input id="startButton" type="button" value="Start" class="action-button shadow animate green" onclick="start(0); activeButton(this)" />
-                    <input type="button" id="stopButton" value="Stop" class="action-button shadow animate red" onclick="pause(); activeButton(this)" />
+                    <input id="startButton" type="button" value="Start" disabled="disabled" class="action-button shadow animate green" onclick="checkButtonStatusAndStart(function activeStart() { start(0, true); activeButton(this) })" />
+                    <input type="button" id="stopButton" value="Stop" disabled="disabled" class="action-button shadow animate red" onclick="checkButtonStatusAndStop(function activeStop() { pause(); activeButton(this) })" />
                 </div>
             </form>
         </div>
@@ -55,22 +58,16 @@
             <div class="row-fluid">
                 <div class="row-fluid">
                     <div class="block">
-                        <div id="head" class="navbar navbar-inner block-header">
-                            <br />
-                            Время работы сегодня: 00:00<p></p>
-                        </div>
                         <div class="block-content collapse in">
                             <div class="span12">
-                                <input type="button" class="top-but" value="Add new record">
-                                <a href="javascript://" onclick="addRow('example');return false;">Добавить строку</a>
+                                <div id="head" class="navbar navbar-inner block-header"></div>
                                 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
                                     <thead>
                                         <tr>
                                             <th>Время начала</th>
                                             <th>Время остановки</th>
                                             <th>Тип создания записи</th>
-                                            <th>Количество часов всего </th>
-                                            <th></th>
+                                            <th>Интервал времени </th>
                                         </tr>
                                     </thead>
                                     <tbody id="wall">
@@ -82,21 +79,13 @@
                 </div>
             </div>
         </div>
-
-      <!--<script src="resources/js/vendor/jquery/jquery.dataTables.min.js"></script>-->
-        <!--<script src="resources/js/app/assets/DT_bootstrap.js"></script>
-        <script>
-            $(function () {
-
-            });
-        </script>-->
     </div>
-
-    <script src="resources/js/vendor/bootstrap/bootstrap.js"></script>
     <form id="form1" runat="server">
         <div>
             <asp:ScriptManager ID="ScriptManager2" runat="server" EnablePageMethods="true"></asp:ScriptManager>
         </div>
     </form>
+    <script src="resources/js/vendor/bootstrap/bootstrap.js"></script>
+    <script src="resources/js/app/script.js" type="text/javascript"></script>
 </body>
 </html>

@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
-using program_logic;
 using sql_database;
+using teacher_admin;
+using program_logic;
 
 public partial class login : System.Web.UI.Page
 {
@@ -14,6 +15,22 @@ public partial class login : System.Web.UI.Page
     {
 
     }
+    [WebMethod]
+    public static bool check_is_teacher(string login, string password)
+    {
+        bool boolean = false;
+        current_teacher CurrentTeacher = new current_teacher(login, password);
+        database _database_ = new database();
+        _database_.open_connection();
+        boolean = CurrentTeacher.function_registration_check(_database_);
+        _database_.close_connection();
+        return boolean;
+    }
+
+
+
+
+
 
     [WebMethod]
     public static bool check_ip()

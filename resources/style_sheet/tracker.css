@@ -1,0 +1,11 @@
+﻿button, html input[type="button"], input[type="reset"], input[type="submit"] {
+-webkit-appearance: button;
+cursor: pointer;
+border: 3px solid #1c1e22;
+background: #757578;
+border-radius: 7px;
+}
+
+body {
+font-family:sans-serif;
+}

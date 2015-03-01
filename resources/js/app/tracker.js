@@ -1,9 +1,29 @@
 ﻿var spinner;
 
+function timeOnTimerToday()
+{
+        var hour,min,sec;
+        var seconds_today;// =returnTimeToday();
+        seconds_today= returnTimeToday();
+
+        if(seconds_today/3600 > 9)hour=parseInt(seconds_today/3600);
+        else hour="0"+parseInt(seconds_today/3600);
+
+        seconds_today-=parseInt(hour)*3600;
+        if(seconds_today/60 >9) min=parseInt(seconds_today/60);
+        else min="0"+parseInt(seconds_today/60);
+        seconds_today-=parseInt(min)*60;
+        if(seconds_today>9)sec=seconds_today;
+        else sec ="0" + seconds_today;
+        return  ""+hour+":"+min+":"+sec;
+}
+
 $(document).ready(function () {
     PageMethods.check_ip(onSucess, onError);
-    function onSucess(result) {
+	var results=0;
+	function onSucess(result) {
         if (result == true) {
+			results=result;
             (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
@@ -32,11 +52,13 @@ $(document).ready(function () {
                                         }
                                         else {
                                             PageMethods.generation_table(response.id, onSucess, onError);
-                                            function onSucess(result) {
+                                            function onSucess(result) {                                             
                                                 generation(result);
                                                 var _curent_ = 0;
+                                                
                                                 //функция для очистки поля
-                                                readout = '00:00:00';
+                                                //readout = '00:00:00';
+                                                readout=timeOnTimerToday();
                                                 document.TestForm.stopwatch.value = readout;
                                                 var currentPosition = $('.user_name');
                                                 currentPosition.text(' ' + response.first_name + ' ' + response.last_name + ' ');
@@ -54,7 +76,7 @@ $(document).ready(function () {
                                                         sec = now.getSeconds();
                                                         PageMethods.session_time(day, month, year, sec, min, hour, response.id, onSucess, onError);
                                                         function onSucess(result) {
-                                                            start(result);
+                                                            start(result, false);
                                                         }
                                                         function onError(result) { alert("System Error"); }
                                                     }
@@ -106,41 +128,34 @@ function logout() {
         }
     });
 }
-
-
-
 function generation(arr) {
+	
     for (var i = 0; i < arr.length; i += 4) {
         var tr = document.createElement('tr');
 
         var td = $('<td>')
-.appendTo(tr)
-.text(arr[i]);
+            .appendTo(tr)
+            .text(arr[i])
+            .addClass("el");
 
         var td1 = $('<td>')
-        .appendTo(tr)
-        .text(arr[i + 1]);
+            .appendTo(tr)
+            .text(arr[i + 1])
+            .addClass("el");
 
         var td2 = $('<td>')
         .appendTo(tr)
-        .text(arr[i + 3]);
+        .text(arr[i + 3])
+		.addClass("reg");
 
         var td3 = $('<td>')
         .appendTo(tr)
         .attr('class', 'center')
         .text(arr[i + 2]);
-
-        var td4 = $('<td>')
-        .appendTo(tr)
-         .attr('class', 'center');
-        var input = $('<input />')
-    .appendTo(td4)
-        .attr('type', 'button')
-        .attr('value', 'Edit')
-        .attr('width', '50');
-
+		
         var wall = document.getElementById('wall');
         var first = wall.childNodes[0];
         wall.insertBefore(tr, first);
     }
+	TABLE.formwork('#example');
 }

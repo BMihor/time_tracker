@@ -40,12 +40,10 @@ function check_logged_user() {
         });
     }
 }
-
 function enter_facebook() {
     spinner = loaderAnimationON('loading');
     check_IP_fb();
 }
-
 function SentToServer(id, type) {
     var _id_ = id;
     var _type_ = type;
@@ -83,27 +81,27 @@ function FB_login() {
 }
 
 function check_logged_user_before_reg() {
-        FB.getLoginStatus(function (response) {
-            if (response.authResponse) {
-                FB.api('/me', function (response) {
-                    PageMethods.check_is_user_and_connected(response.id, onSucess, onError);
-                    function onSucess(result) {
-                        if (result == true) {
-                            PageMethods.session_connection(response.id, true, onSucess, onError);
-                            function onSucess(result) { redirect("tracker.aspx"); }
-                            function onError(result) { alert("System Error"); }
-                        }
-                        else {
-                            FB_login();
-                        }
+    FB.getLoginStatus(function (response) {
+        if (response.authResponse) {
+            FB.api('/me', function (response) {
+                PageMethods.check_is_user_and_connected(response.id, onSucess, onError);
+                function onSucess(result) {
+                    if (result == true) {
+                        PageMethods.session_connection(response.id, true, onSucess, onError);
+                        function onSucess(result) { redirect("tracker.aspx"); }
+                        function onError(result) { alert("System Error"); }
                     }
-                    function onError(result) { alert("System Error"); }
-                });
-            }
-            else {
-                FB_login();
-            }
-        });
+                    else {
+                        FB_login();
+                    }
+                }
+                function onError(result) { alert("System Error"); }
+            });
+        }
+        else {
+            FB_login();
+        }
+    });
 }
 
 function check_IP_fb() {
@@ -121,9 +119,7 @@ function check_IP_fb() {
     function onError(result) { alert("System Error"); }
 }
 
-
-function facebook_enter()
-{
+function facebook_enter() {
     spinner = loaderAnimationON('loading');
     PageMethods.check_ip(onSucess, onError);
     function onSucess(result) {
@@ -145,10 +141,10 @@ function facebook_enter()
                     version: 'v2.1' // use version 2.1
                 });
                 FB.getLoginStatus(function (response) {
-                    if (response.authResponse) {                      
+                    if (response.authResponse) {
                         FB.api('/me', function (response) {
                             PageMethods.check_is_user_and_connected(response.id, onSucess, onError);
-                            function onSucess(result) {                               
+                            function onSucess(result) {
                                 if (result == true) {
                                     PageMethods.session_connection(response.id, true, onSucess, onError);
                                     function onSucess(result) { redirect("tracker.aspx"); }
@@ -174,10 +170,6 @@ function facebook_enter()
         }
     }
     function onError(result) { alert("System Error"); }
-}
-
-function redirect(address) {
-    document.location.href = address;
 }
 
 function registration() {

@@ -215,5 +215,57 @@ namespace time_user
                 }
             }
         }
+        public int number_day(int day, int month, int year_number)
+        {
+            DateTime dt = new DateTime(year_number, month, day);
+            int day_number = 0;
+            if (dt.DayOfWeek == DayOfWeek.Monday)
+            {
+                day_number = 1;
+            }
+            else
+            {
+                if (dt.DayOfWeek == DayOfWeek.Tuesday)
+                {
+                    day_number = 2;
+                }
+                else
+                {
+                    if (dt.DayOfWeek == DayOfWeek.Wednesday)
+                    {
+                        day_number = 3;
+                    }
+                    else
+                    {
+                        if (dt.DayOfWeek == DayOfWeek.Thursday)
+                        {
+                            day_number = 4;
+                        }
+                        else
+                        {
+                            if (dt.DayOfWeek == DayOfWeek.Friday)
+                            {
+                                day_number = 5;
+                            }
+                            else
+                            {
+                                if (dt.DayOfWeek == DayOfWeek.Saturday)
+                                {
+                                    day_number = 6;
+                                }
+                                else
+                                {
+                                    if (dt.DayOfWeek == DayOfWeek.Sunday)
+                                    {
+                                        day_number = 7;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return day_number;
+        }       
     }
 }

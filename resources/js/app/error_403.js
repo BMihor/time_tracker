@@ -3,7 +3,3 @@
         redirect("login.aspx");
     });
 });
-
-function redirect(address) {
-    document.location.href = address;
-}

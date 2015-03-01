@@ -47,3 +47,8 @@ margin: 35px 18px 57px 124px ;
     color: rgba(50, 50, 50, 0.70);
     background-color: grey;
 }
+input[type="button"]:disabled{
+	cursor:no-drop;
+	border:3px solid #757578; 
+	background-color:#353A41;
+}

@@ -36,8 +36,8 @@ namespace program_logic
             bool authorization_check = false;
             authorization_check = CurrentUser.function_authorization_check(_database_);
             if (registration_check == true && authorization_check == true)
-            { 
-                boolean = true; 
+            {
+                boolean = true;
             }
             else
             {

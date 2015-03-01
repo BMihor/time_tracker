@@ -1,7 +1,4 @@
-﻿var spinner;
-
-$(document).ready(function () {
-    spinner = loaderAnimationON('loading');
+﻿$(document).ready(function () {
     $('.go_to_user_panel').show();
     $('.user_login').hide();
     enter_CP();
@@ -11,18 +8,13 @@ $(document).ready(function () {
         $('.go_to_user_panel').show();
         $('.go_to_admin_panel').hide();
         enter_CP();
-        spinner.stop();
     });
     $('.go_to_user_panel').click(function () {
-        spinner = loaderAnimationON('loading');
         $('.admin_login').remove();
-
         $('.user_login').show();
         $('.go_to_admin_panel').show();
         $('.go_to_user_panel').hide();
-        spinner.stop();
     });
-    spinner.stop();
 });
 
 function enter_CP() {
@@ -39,13 +31,9 @@ function enter_CP() {
     var span1 = $('<span>')
     span1.appendTo(div2)
     span1.text('Пожалуйста, войдите под своим именем пользователя и паролем.');
-    var form = $('<form>')
+    var form = $('<div>')
     .appendTo(admin_login)
     .attr('class', 'form-horizontal contact_form')
-    .attr('action', '#')
-    .attr('method', 'post')
-    .attr('name', 'contact_form')
-     .attr('novalidate', 'novalidate');
     var ul = $('<ul>')
     .appendTo(form);
     var li1 = $('<li>')
@@ -102,15 +90,33 @@ function enter_CP() {
     var div6 = $('<div>')
     .appendTo(li2)
     .attr('class', 'clearfix');
-
     var li3 = $('<li>')
      .appendTo(ul);
     var p1 = $('<p>')
         .appendTo(li3)
         .attr('class', 'center col-md-5');
-    var button1 = $('<button>')
+
+    var input_t = $('<input/>')
         .appendTo(p1)
         .attr('type', 'submit')
-        .attr('class', 'btn btn-primary')
-    .text('Войти');
+        .attr('class', 'btn btn-primary submit')
+        .attr('value', 'Войти')
+    .attr('onclick', 'check_teacher();');
+}
+function onSucess_check_teacher(result) {
+    if (result == true) {
+        redirect("teacher.aspx");
+    }
+    else {
+        redirect("index.aspx");
+    }
+}
+function onError_check_teacher(result) {
+    alert("System Error");
+}
+
+function check_teacher() {
+    if (document.getElementById('login').value != "" && document.getElementById('password').value != "") {
+        PageMethods.check_is_teacher(document.getElementById('login').value, document.getElementById('password').value, onSucess_check_teacher, onError_check_teacher);
+    }
 }

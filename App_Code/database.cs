@@ -28,7 +28,7 @@ namespace sql_database
             {
                 connect.Open();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             { }
         }
         // закрить соединение
@@ -38,7 +38,7 @@ namespace sql_database
             {
                 connect.Close();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             { }
         }
         // взять что-то из базы 
@@ -63,9 +63,41 @@ namespace sql_database
                     database_records = list;
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             { }
             return database_records;
+        }
+        // обновить запись авторизации преподавателя
+        public void update_datebase_session_teacher(string login, string password, bool status)
+        {
+            try
+            {
+                string sql = string.Format("UPDATE teacher_account" + " " +
+                       "set connection_status='" + status + "' " +
+                   "where login='" + login + "' and password='" + password + "'" + ";");
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            { }
+        }
+        public void update_table_properties(int[] befor, int[] after)
+        {
+            try
+            {
+                string sql = string.Format("UPDATE user_count_work set count_work_day=" + after[0] * 3600 +
+                    ", count_work_week=" + after[1] * 3600 + ", count_work_month=" + after[2] * 3600 + " where count_work_day=" + befor[0] * 3600 +
+                    " and count_work_week=" + befor[1] * 3600 +
+                    " and count_work_month=" + befor[2] * 3600);
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            { }
         }
         // новый пользователь
         public void insert_datebase_user(string user_id, string user_first_name,
@@ -237,6 +269,20 @@ namespace sql_database
             catch (SqlException ex)
             { }
         }
+        public void update_table_ip(string[] befor, string[] after)
+        {
+            try
+            {
+                string sql = string.Format("UPDATE access_connect set permitted_ip='"+ after[0] +
+                    "', office_name='"+ after[1] + "' where permitted_ip='" + befor[0] + "'");
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            { }
+        }
         // вставить записи в табличку записей
         public void insert_datebase_session_on_file(current_user CurrentUser, user_time time, database Database)
         {
@@ -256,7 +302,6 @@ namespace sql_database
             catch (SqlException ex)
             { }
         }
-
         // вставить запись сессии после нажатия кнопки старт
         public void insert_datbase_session_start(current_user CurrentUser, user_time time, database Database)
         {
@@ -282,5 +327,66 @@ namespace sql_database
             catch (SqlException ex)
             { }
         }
+        public void update_datebase(string what, string condition)
+        {
+            try
+            {
+                string sql = string.Format("UPDATE " + what + " " + condition);
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            {
+
+            }
+        }
+
+        // вставить записи в табличку записей
+        public void insert_datbase_ip_connection(string ip, string name)
+        {
+            try
+            {
+                string sql = string.Format("Insert Into access_connect " + "(permitted_ip, office_name)Values('{0}', '{1}')",
+                       ip, name);
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException ex)
+            { }
+        }
+        
+        public void update_user_recording(current_user CurrentUser, string[] time_start_befor, string[] time_finish_befor, string[] time_start_after, string[] time_finish_after)
+        {
+            try
+            {
+                string sql = string.Format("UPDATE user_recording set data_start_Day=" + time_start_after[2] +
+                    ", data_start_Month=" + time_start_after[1] + ", data_start_Year=" +  time_start_after[0] + 
+                    ", data_start_Min=" + time_start_after[4] + ", data_start_Hour=" + time_start_after[3] +                  
+                    ", data_finish_Day=" + time_finish_after[2] +
+                    ", data_finish_Month=" + time_finish_after[1] + ", data_finish_Year=" +  time_finish_after[0] + 
+                    ", data_finish_Min=" + time_finish_after[4] + ", data_finish_Hour=" + time_finish_after[3] +
+                    ", type_created='Edit'" +
+                    " where user_id='" + CurrentUser.Get_user_id() + "' and " +
+                    "data_start_Day=" + time_start_befor[2] +
+                    " and data_start_Month=" + time_start_befor[1] + " and data_start_Year=" + time_start_befor[0] +
+                    " and data_start_Min=" + time_start_befor[4] + " and data_start_Hour=" + time_start_befor[3] +
+                    " and data_finish_Day=" + time_finish_befor[2] +
+                    " and data_finish_Month=" + time_finish_befor[1] + " and data_finish_Year=" + time_finish_befor[0] +
+                    " and data_finish_Min=" + time_finish_befor[4] + " and data_finish_Hour=" + time_finish_befor[3]);
+
+
+                using (SqlCommand cmd = new SqlCommand(sql, this.connect))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException)
+            { }
+        }
+   
     }
 }
